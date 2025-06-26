@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+/* Override default styles for lyrics player to prevent bottom spacing */
+.lyric-player-container,
+.lyric-player-container > *,
+[class*="lyric"],
+[class*="lyrics"] {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure the lyrics container fills the entire height */
+body, #root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
