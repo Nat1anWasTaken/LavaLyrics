@@ -59,13 +59,27 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
 
             try {
                 const lyrics = await api.getLyrics(guildId);
-                const lines = apiLyricsIntoLyricLines(lyrics);
-                setLyricLines(lines);
+                if (lyrics.has_lyrics) {
+                    const lines = apiLyricsIntoLyricLines(lyrics);
+                    setLyricLines(lines);
+                } else {
+                    setLyricLines([
+                        {
+                            words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
+                            translatedLyric: "",
+                            romanLyric: "",
+                            startTime: 0,
+                            endTime: 1000,
+                            isBG: false,
+                            isDuet: false
+                        }
+                    ]);
+                }
             } catch (error) {
                 console.error("Failed to fetch lyrics:", error);
                 setLyricLines([
                     {
-                        words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
+                        words: [{ word: "An error occurred while fetching lyrics :(", startTime: 0, endTime: 1000 }],
                         translatedLyric: "",
                         romanLyric: "",
                         startTime: 0,
