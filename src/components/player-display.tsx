@@ -32,7 +32,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                 lastFetchTimeRef.current = Date.now();
 
                 if (playerState.current_track) {
-                    setCurrentTime(playerState.current_track.position | 0); // Convert to integer
+                    setCurrentTime(playerState.current_track.position | 0);
                 }
             } catch (error) {
                 if (error instanceof ApiError && error.status === 404) {
@@ -46,7 +46,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
         }
 
         fetchPlayerState();
-        const interval = setInterval(fetchPlayerState, 2000); // Reduced interval for better sync
+        const interval = setInterval(fetchPlayerState, 2000);
 
         return () => {
             clearInterval(interval);
@@ -101,15 +101,13 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
             const currentPlayerState = playerStateRef.current;
 
             if (currentPlayerState?.current_track) {
-                // Don't run the clock if paused
                 if (!currentPlayerState.is_paused) {
                     const now = Date.now();
                     const elapsedSinceLastFetch = now - lastFetchTimeRef.current;
-                    const calculatedTime = (currentPlayerState.current_track.position + elapsedSinceLastFetch) | 0; // Convert to integer
+                    const calculatedTime = (currentPlayerState.current_track.position + elapsedSinceLastFetch) | 0;
 
                     setCurrentTime(calculatedTime);
                 } else {
-                    // If paused, use the position from the track without adding elapsed time
                     setCurrentTime(currentPlayerState.current_track.position | 0);
                 }
             }
@@ -122,9 +120,8 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
         return () => {
             cancelAnimationFrame(animationId);
         };
-    }, [playerState]); // Added playerState as dependency
+    }, [playerState]);
 
-    // Show no player component when player is not found (404)
     if (isPlayerNotFound) {
         return <NoPlayer />;
     }

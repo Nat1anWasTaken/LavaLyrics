@@ -5,25 +5,20 @@ export function NoPlayer() {
 
             <div className="relative z-10 flex h-full w-full items-center justify-center">
                 <div className="text-center max-w-md mx-auto px-6">
-                    {/* Music Note Icon */}
                     <div className="mb-8 flex justify-center">
                         <div className="relative">
                             <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
                                 <img src="/logo.png" className="w-12 h-12" />
                             </div>
-                            {/* Animated rings */}
                             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-ping" />
                             <div className="absolute inset-0 rounded-full border border-white/10 animate-pulse" style={{ animationDelay: "1s" }} />
                         </div>
                     </div>
 
-                    {/* Title */}
                     <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">No Player Active</h2>
 
-                    {/* Description */}
                     <p className="text-white/70 text-lg mb-8 leading-relaxed">The music player isn't currently active in this server. Start your musical journey by playing a song!</p>
 
-                    {/* Call to action */}
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                         <div className="flex items-center justify-center mb-3">
                             <div className="bg-green-500/20 rounded-lg p-2 mr-3">
@@ -40,7 +35,6 @@ export function NoPlayer() {
                 </div>
             </div>
 
-            {/* Subtle background pattern */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-white animate-pulse" style={{ animationDelay: "2s", animationDuration: "4s" }} />
                 <div className="absolute top-3/4 right-1/4 w-24 h-24 rounded-full bg-white animate-pulse" style={{ animationDelay: "1s", animationDuration: "3s" }} />

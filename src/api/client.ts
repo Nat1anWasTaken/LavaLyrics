@@ -27,32 +27,26 @@ export class LavaLyricsAPI {
             throw new ApiError(response.status, response.statusText);
         }
 
-        // Handle empty responses
         const text = await response.text();
         return text ? JSON.parse(text) : null;
     }
 
-    // Root endpoint
     async getRoot(): Promise<unknown> {
         return this.request("/");
     }
 
-    // Guild endpoints
     async getGuilds(): Promise<unknown> {
         return this.request("/guilds");
     }
 
-    // Player state
     async getPlayerState(guildId: GuildId): Promise<PlayerState> {
         return this.request(`/player/${guildId}`);
     }
 
-    // Now playing
     async getNowPlaying(guildId: GuildId): Promise<TrackInfo | null> {
         return this.request(`/player/${guildId}/nowplaying`);
     }
 
-    // Queue management
     async getQueue(guildId: GuildId, limit = 50): Promise<QueueInfo> {
         return this.request(`/player/${guildId}/queue?limit=${limit}`);
     }
@@ -69,7 +63,6 @@ export class LavaLyricsAPI {
         });
     }
 
-    // Lyrics
     async getLyrics(guildId: GuildId): Promise<ApiLyricsInfo> {
         return this.request(`/player/${guildId}/lyrics`);
     }
@@ -84,7 +77,6 @@ export class LavaLyricsAPI {
         });
     }
 
-    // Playback controls
     async playTrack(guildId: GuildId, playRequest: PlayRequest): Promise<void> {
         return this.request(`/player/${guildId}/play`, {
             method: "POST",
@@ -117,7 +109,6 @@ export class LavaLyricsAPI {
         });
     }
 
-    // Volume control
     async setVolume(guildId: GuildId, volume: number): Promise<void> {
         const volumeRequest: VolumeRequest = { volume };
         return this.request(`/player/${guildId}/volume`, {
@@ -126,7 +117,6 @@ export class LavaLyricsAPI {
         });
     }
 
-    // Player modes
     async toggleShuffle(guildId: GuildId, enabled: boolean): Promise<void> {
         return this.request(`/player/${guildId}/shuffle?enabled=${enabled}`, {
             method: "POST"
@@ -145,7 +135,6 @@ export class LavaLyricsAPI {
         });
     }
 
-    // Audio filters
     async getFilters(guildId: GuildId): Promise<unknown> {
         return this.request(`/player/${guildId}/filters`);
     }

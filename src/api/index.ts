@@ -1,4 +1,3 @@
-// Export all types
 export type {
     FilterRequest,
     GuildId,
@@ -16,12 +15,9 @@ export type {
     VolumeRequest
 } from "./types";
 
-// Export the main API client
 export { LavaLyricsAPI } from "./client";
 
-// Export utilities
 export * from "./utils";
 
-// Create a default instance for convenience
 import { LavaLyricsAPI } from "./client";
 export const api = new LavaLyricsAPI();

@@ -1,4 +1,3 @@
-// Type definitions based on OpenAPI schema
 export interface ValidationError {
     loc: (string | number)[];
     msg: string;
@@ -67,7 +66,6 @@ export interface FilterRequest {
     parameters?: Record<string, unknown> | null;
 }
 
-// Additional utility types
-export type LoopMode = 0 | 1 | 2; // 0=off, 1=track, 2=queue
+export type LoopMode = 0 | 1 | 2;
 export type GuildId = string;
 export type TrackIndex = number;
