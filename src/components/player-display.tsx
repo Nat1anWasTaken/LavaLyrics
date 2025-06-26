@@ -80,18 +80,14 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
     }, [playerState]); // Added playerState as dependency
 
     return (
-        <div className="relative h-full w-full bg-gray-800 overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden">
             <LyricPlayer
                 className="relative z-10 h-full w-full overflow-hidden"
                 style={{ height: "100%", display: "flex", flexDirection: "column" }}
                 lyricLines={lyricLines}
                 currentTime={currentTime}
             />
-            <BackgroundRender
-                className="absolute top-0 left-0 h-full w-full"
-                renderer={EplorRenderer}
-                album={playerStateRef.current?.current_track?.artwork_url ?? "https://dummyimage.com/600x400/000/fff&text=+"}
-            />
+            <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork`} />
         </div>
     );
 }
