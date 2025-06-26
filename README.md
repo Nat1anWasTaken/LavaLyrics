@@ -1,69 +1,65 @@
-# React + TypeScript + Vite
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Lava Lyrics
 
-Currently, two official plugins are available:
+Discord Activity for [Lava Music Bot][lava-main] with Apple Music-style animated lyrics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deploy to Vercel
 
-## Expanding the ESLint configuration
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNat1anWasTaken%2Flava-lyrics)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Setup Instructions
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Get a Vercel Account
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Create an account at [vercel.com](https://vercel.com)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 2. Deploy to Vercel
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Click the "Deploy with Vercel" button above and follow the deployment process.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 3. Setup Discord Developer Portal
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application or select an existing one
+3. Navigate to **Activities** in the left sidebar
+4. Enable Activities for your application
+5. Add URL mappings:
+    - **Main App**:
+        - **Target URL**: Your Vercel deployment URL (e.g., `https://your-app.vercel.app`)
+        - **Prefix**: `/`
+    - **API Proxy**:
+        - **Target URL**: Your Lava bot's API URL (e.g., `https://your-lava-api.com`)
+        - **Prefix**: `/api`
+
+For detailed URL mapping setup, see [Discord's URL Mapping Guide](https://discord.com/developers/docs/activities/development-guides/local-development#url-mapping).
+
+### 4. Use in Discord
+
+1. Make sure [Lava Music Bot][lava-main] is in your Discord server
+2. Start playing music with Lava
+3. Launch the Lava Lyrics activity in Discord
+4. Enjoy Apple Music-style animated lyrics!
+
+## Requirements
+
+- [Lava Music Bot][lava-main] must be installed in your Discord server
+- Discord server with Activities enabled
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/Nat1anWasTaken/lava-lyrics.svg?style=for-the-badge
+[contributors-url]: https://github.com/Nat1anWasTaken/lava-lyrics/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Nat1anWasTaken/lava-lyrics.svg?style=for-the-badge
+[forks-url]: https://github.com/Nat1anWasTaken/lava-lyrics/network/members
+[stars-shield]: https://img.shields.io/github/stars/Nat1anWasTaken/lava-lyrics.svg?style=for-the-badge
+[stars-url]: https://github.com/Nat1anWasTaken/lava-lyrics/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Nat1anWasTaken/lava-lyrics.svg?style=for-the-badge
+[issues-url]: https://github.com/Nat1anWasTaken/lava-lyrics/issues
+[license-shield]: https://img.shields.io/github/license/Nat1anWasTaken/lava-lyrics.svg?style=for-the-badge
+[license-url]: https://github.com/Nat1anWasTaken/lava-lyrics/blob/main/LICENSE
+[lava-main]: https://github.com/Nat1anWasTaken/Lava
