@@ -1,5 +1,16 @@
 import type { ApiLyricsInfo, FilterRequest, GuildId, LoopMode, PlayerState, PlayRequest, QueueInfo, SkipRequest, TrackIndex, TrackInfo, VolumeRequest } from "./types";
 
+export class ApiError extends Error {
+    constructor(
+        public status: number,
+        public statusText: string,
+        message?: string
+    ) {
+        super(message || `API request failed: ${status} ${statusText}`);
+        this.name = "ApiError";
+    }
+}
+
 export class LavaLyricsAPI {
     private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
         const url = `/.proxy/api${endpoint}`;
@@ -13,7 +24,7 @@ export class LavaLyricsAPI {
         });
 
         if (!response.ok) {
-            throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+            throw new ApiError(response.status, response.statusText);
         }
 
         // Handle empty responses
