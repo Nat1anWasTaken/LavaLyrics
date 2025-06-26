@@ -56,7 +56,8 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
             const currentPlayerState = playerStateRef.current;
 
             if (currentPlayerState?.current_track) {
-                if (currentPlayerState.is_playing) {
+                // Don't run the clock if paused
+                if (!currentPlayerState.is_paused) {
                     const now = Date.now();
                     const elapsedSinceLastFetch = now - lastFetchTimeRef.current;
                     const calculatedTime = (currentPlayerState.current_track.position + elapsedSinceLastFetch) | 0; // Convert to integer
