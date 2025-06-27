@@ -56,7 +56,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
 
     useEffect(() => {
         async function fetchLyrics() {
-            if (isPlayerNotFound) return;
+            if (isPlayerNotFound || !playerState?.lyrics_loaded) return;
 
             try {
                 const lyrics = await api.getLyrics(guildId);
