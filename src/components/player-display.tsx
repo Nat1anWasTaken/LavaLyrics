@@ -21,7 +21,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
     const [currentTime, setCurrentTime] = useState(0);
     const [playerState, setPlayerState] = useState<PlayerState | null>(null);
     const [isPlayerNotFound, setIsPlayerNotFound] = useState(false);
-    const [random, setRandom] = useState(0);
+    const [random, setRandom] = useState(Math.random() * 1000);
 
     useEffect(() => {
         async function fetchPlayerState() {
