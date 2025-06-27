@@ -156,6 +156,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                 enableBlur={true}
                 enableSpring={true}
                 enableScale={true}
+                playing={!playerState?.is_paused}
             />
             <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork?random=${random}`} />
         </div>
