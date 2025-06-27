@@ -56,7 +56,22 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
 
     useEffect(() => {
         async function fetchLyrics() {
-            if (isPlayerNotFound || !playerState?.lyrics_loaded) return;
+            if (isPlayerNotFound) return;
+
+            if (!playerState?.lyrics_loaded) {
+                setLyricLines([
+                    {
+                        words: [{ word: "Loading lyrics...", startTime: 0, endTime: 1000 }],
+                        translatedLyric: "",
+                        romanLyric: "",
+                        startTime: 0,
+                        endTime: 0,
+                        isBG: false,
+                        isDuet: false
+                    }
+                ]);
+                return;
+            }
 
             try {
                 const lyrics = await api.getLyrics(guildId);
@@ -80,7 +95,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                 console.error("Failed to fetch lyrics:", error);
                 setLyricLines([
                     {
-                        words: [{ word: "An error occurred while fetching lyrics :(", startTime: 0, endTime: 1000 }],
+                        words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
                         translatedLyric: "",
                         romanLyric: "",
                         startTime: 0,
@@ -93,7 +108,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
         }
 
         fetchLyrics();
-    }, [api, guildId, playerState?.current_track?.uri, isPlayerNotFound, playerState?.lyrics_loaded]);
+    }, [api, guildId, isPlayerNotFound, playerState?.current_track?.uri, playerState?.lyrics_loaded]);
 
     useEffect(() => {
         setRandom(Math.random() * 1000);
