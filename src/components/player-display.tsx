@@ -75,10 +75,8 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
 
             try {
                 const lyrics = await api.getLyrics(guildId);
-                if (lyrics.has_lyrics) {
-                    const lines = apiLyricsIntoLyricLines(lyrics);
-                    setLyricLines(lines);
-                } else {
+
+                if (!lyrics.has_lyrics || lyrics.lyrics.length === 0) {
                     setLyricLines([
                         {
                             words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
@@ -90,7 +88,11 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                             isDuet: false
                         }
                     ]);
+                    return;
                 }
+
+                const lines = apiLyricsIntoLyricLines(lyrics);
+                setLyricLines(lines);
             } catch (error) {
                 console.error("Failed to fetch lyrics:", error);
                 setLyricLines([
