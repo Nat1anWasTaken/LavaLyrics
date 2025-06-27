@@ -39,6 +39,7 @@ export interface PlayerState {
     autoplay: boolean;
     position: number;
     filters: string[];
+    lyrics_loaded: boolean;
 }
 
 export interface QueueInfo {

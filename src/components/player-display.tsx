@@ -55,60 +55,45 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
     }, [api, guildId]);
 
     useEffect(() => {
-        function setNoLyrics() {
-            setLyricLines([
-                {
-                    words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
-                    translatedLyric: "",
-                    romanLyric: "",
-                    startTime: 0,
-                    endTime: 1000,
-                    isBG: false,
-                    isDuet: false
-                }
-            ]);
-        }
-
-        function setLyricsError() {
-            setLyricLines([
-                {
-                    words: [{ word: "An error occurred while fetching lyrics :(", startTime: 0, endTime: 1000 }],
-                    translatedLyric: "",
-                    romanLyric: "",
-                    startTime: 0,
-                    endTime: 1000,
-                    isBG: false,
-                    isDuet: false
-                }
-            ]);
-        }
-
-        async function fetchLyricsWithRetry(maxRetries = 3, delay = 500) {
+        async function fetchLyrics() {
             if (isPlayerNotFound) return;
 
-            for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                try {
-                    const lyrics = await api.getLyrics(guildId);
-                    if (lyrics.has_lyrics) {
-                        const lines = apiLyricsIntoLyricLines(lyrics);
-                        setLyricLines(lines);
-                    } else {
-                        setNoLyrics();
-                    }
-                    return;
-                } catch (error) {
-                    if (attempt === maxRetries) {
-                        console.error("Failed to fetch lyrics after retries:", error);
-                        setLyricsError();
-                        return;
-                    }
-                    await new Promise((res) => setTimeout(res, delay));
+            try {
+                const lyrics = await api.getLyrics(guildId);
+                if (lyrics.has_lyrics) {
+                    const lines = apiLyricsIntoLyricLines(lyrics);
+                    setLyricLines(lines);
+                } else {
+                    setLyricLines([
+                        {
+                            words: [{ word: "No lyrics found :(", startTime: 0, endTime: 1000 }],
+                            translatedLyric: "",
+                            romanLyric: "",
+                            startTime: 0,
+                            endTime: 1000,
+                            isBG: false,
+                            isDuet: false
+                        }
+                    ]);
                 }
+            } catch (error) {
+                console.error("Failed to fetch lyrics:", error);
+                setLyricLines([
+                    {
+                        words: [{ word: "An error occurred while fetching lyrics :(", startTime: 0, endTime: 1000 }],
+                        translatedLyric: "",
+                        romanLyric: "",
+                        startTime: 0,
+                        endTime: 1000,
+                        isBG: false,
+                        isDuet: false
+                    }
+                ]);
             }
         }
 
-        fetchLyricsWithRetry();
-    }, [api, guildId, playerState?.current_track?.uri, isPlayerNotFound]);
+        fetchLyrics();
+    }, [api, guildId, playerState?.current_track?.uri, isPlayerNotFound, playerState?.lyrics_loaded]);
 
     useEffect(() => {
         setRandom(Math.random() * 1000);
