@@ -21,6 +21,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
     const [currentTime, setCurrentTime] = useState(0);
     const [playerState, setPlayerState] = useState<PlayerState | null>(null);
     const [isPlayerNotFound, setIsPlayerNotFound] = useState(false);
+    const [random, setRandom] = useState(0);
 
     useEffect(() => {
         async function fetchPlayerState() {
@@ -95,6 +96,10 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
     }, [api, guildId, playerState?.current_track?.uri, isPlayerNotFound]);
 
     useEffect(() => {
+        setRandom(Math.random() * 1000);
+    }, [playerState?.current_track?.uri, isPlayerNotFound]);
+
+    useEffect(() => {
         let animationId: number;
 
         const frame = () => {
@@ -137,7 +142,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                 enableSpring={true}
                 enableScale={true}
             />
-            <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork`} />
+            <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork?random=${random}`} />
         </div>
     );
 }
