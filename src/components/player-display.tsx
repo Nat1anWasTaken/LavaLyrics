@@ -142,7 +142,7 @@ export function PlayerDisplay({ guildId }: PlayerDisplayProps) {
                 enableSpring={true}
                 enableScale={true}
             />
-            <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork?random=${Math.random() * 1000}`} />
+            <BackgroundRender className="absolute top-0 left-0 h-full w-full" renderer={EplorRenderer} album={`/.proxy/api/player/${guildId}/artwork?random=${random}`} />
         </div>
     );
 }
